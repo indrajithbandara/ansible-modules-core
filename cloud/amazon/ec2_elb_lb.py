@@ -962,7 +962,7 @@ class ElbManager(object):
         attributes = self.elb.get_attributes()
         if self.connection_draining_timeout is not None:
             if not attributes.connection_draining.enabled or \
-                    attributes.connection_draining.timeout != self.connection_draining_timeout:
+                    int(attributes.connection_draining.timeout) != int(self.connection_draining_timeout):
                 self.changed = True
             attributes.connection_draining.enabled = True
             attributes.connection_draining.timeout = self.connection_draining_timeout
@@ -976,7 +976,7 @@ class ElbManager(object):
     def _set_idle_timeout(self):
         attributes = self.elb.get_attributes()
         if self.idle_timeout is not None:
-            if attributes.connecting_settings.idle_timeout != self.idle_timeout:
+            if int(attributes.connecting_settings.idle_timeout) != int(self.idle_timeout):
                 self.changed = True
             attributes.connecting_settings.idle_timeout = self.idle_timeout
             self.elb_conn.modify_lb_attribute(self.name, 'ConnectingSettings', attributes.connecting_settings)
