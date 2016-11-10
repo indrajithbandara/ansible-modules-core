@@ -894,10 +894,10 @@ class ElbManager(object):
             # health_check; values are desired values of new health_check
             health_check_config = {
                 "target": self._get_health_check_target(),
-                "timeout": self.health_check['response_timeout'],
-                "interval": self.health_check['interval'],
-                "unhealthy_threshold": self.health_check['unhealthy_threshold'],
-                "healthy_threshold": self.health_check['healthy_threshold'],
+                "timeout": int(self.health_check['response_timeout']),
+                "interval": int(self.health_check['interval']),
+                "unhealthy_threshold": int(self.health_check['unhealthy_threshold']),
+                "healthy_threshold": int(self.health_check['healthy_threshold'])
             }
 
             update_health_check = False
